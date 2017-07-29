@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
 class SongCreate extends Component {
@@ -12,7 +13,11 @@ class SongCreate extends Component {
 	onSubmit(event) {
 		event.preventDefault();	//keeps the form from attempting to sumbit itself
 
-
+		this.props.mutate({
+			variables: {
+				title: this.state.title
+			}
+		})
 	}
 
 	render() {
@@ -32,9 +37,11 @@ class SongCreate extends Component {
 }
 
 const mutation = gql`
-	mutation {
-		addSong(title: )
+	mutation AddSong($title: String) {
+		addSong(title: $title) {
+			title
+		}
 	}
 `;
 
-export default SongCreate;
+export default graphql(mutation)(SongCreate);
