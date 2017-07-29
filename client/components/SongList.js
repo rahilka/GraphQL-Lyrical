@@ -35,5 +35,16 @@ class SongList extends Component {
 	}
 }
 
-export default graphql(query)(SongList);
+const mutation = gql`
+	mutation DeleteSong($id: ID) {
+	  deleteSong(id: $id) {
+	    id
+	  }
+	}
+`;
+
+export default graphql(mutation)(
+	graphql(query)(SongList)
+); //MEANING:make a helper using the 'geaphql' and the mutation,
+// and then immediately invoke it with the result of the other helper, 'graphql(query)', and the SongList
 // The data returned from our gql query is placed into our component's PROPS object
