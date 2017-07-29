@@ -10,7 +10,7 @@ class SongList extends Component {
 		// call the muation to delete the song
 		this.props.mutate({
 			variables: { id }
-		});
+		}).then(() => this.props.data.refetch());
 
 	}
 
