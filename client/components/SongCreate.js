@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { graphql } from 'react-apollo';
+import { graphql } from 'react-apollo';	//take a qery and connect with the component
 import gql from 'graphql-tag';
 import { Link, hashHistory } from 'react-router';
 import query from '../queries/fetchSongs';
@@ -16,11 +16,9 @@ class SongCreate extends Component {
 		event.preventDefault();	//keeps the form from attempting to sumbit itself
 
 		this.props.mutate({
-			variables: {
-				title: this.state.title
-			},
-			refetchQueries: [{ query }]
-		}).then(() => hashHistory.push('/'))
+			variables: { title: this.state.title },
+			refetchQueries: [{ query }] //refresh data immediately after running mutation
+		}).then(() => hashHistory.push('/'));
 	}
 
 	render() {
